@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Order</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f8f8f8;
+        }
+        .cart-container {
+            width: 50%;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            text-align: center;
+        }
+        .quantity-btn {
+            padding: 5px 10px;
+            cursor: pointer;
+            border: none;
+            background-color: #e74c3c;
+            color: white;
+            border-radius: 3px;
+        }
+        .quantity-btn:hover {
+            background-color: #c0392b;
+        }
+        .checkout-btn {
+            padding: 10px 20px;
+            font-size: 18px;
+            background: #27ae60;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+        .checkout-btn:hover {
+            background: #219150;
+        }
+        .back-btn {
+            margin-top: 10px;
+            padding: 8px 15px;
+            background: #333;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .back-btn:hover {
+            background: #555;
+        }
+        .discount-message {
+            color: #e74c3c;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .total-box {
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="cart-container">
+        <h2>Your Order</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="cart-items">
+                <!-- Items will be loaded dynamically -->
+            </tbody>
+        </table>
+        
+        <p class="total-box">Total Price Before Discount: Rs. <span id="before-discount">0</span></p>
+        <div id="discount-message"></div>
+        <p class="total-box">Final Price After Discount: Rs. <span id="total-price">0</span></p>
+
+        <button class="checkout-btn" onclick="checkout()">Checkout</button>
+        <button class="back-btn" onclick="goBack()">← Back to Home</button>
+    </div>
+
+    <script>
+        function loadCart() {
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+            let cartItems = document.getElementById("cart-items");
+            let totalPrice = 0;
+            let discount = 0;
+            let today = new Date().getDay(); // 0 = Sunday, 6 = Saturday
+            let discountMessage = "";
+
+            cartItems.innerHTML = "";
+
+            cart.forEach((item, index) => {
+                let itemTotal = item.price * item.quantity;
+                totalPrice += itemTotal;
+
+                cartItems.innerHTML += `
+                    <tr>
+                        <td>${item.name}</td>
+                        <td>Rs.${item.price}</td>
+                        <td>
+                            <button class="quantity-btn" onclick="updateQuantity(${index}, -1)">-</button>
+                            ${item.quantity}
+                            <button class="quantity-btn" onclick="updateQuantity(${index}, 1)">+</button>
+                        </td>
+                        <td>Rs.${itemTotal}</td>
+                        <td><button class="quantity-btn" onclick="removeItem(${index})">Remove</button></td>
+                    </tr>
+                `;
+            });
+
+            // Apply discounts
+            if (totalPrice >= 1000) {
+                discount = totalPrice * 0.12; // 12% discount
+                discountMessage += "<p class='discount-message'>12% discount applied for orders above Rs. 1000.</p>";
+            } else if (totalPrice > 500) {
+                discount = totalPrice * 0.05; // 5% discount
+                discountMessage += "<p class='discount-message'>5% discount applied for orders above Rs. 500.</p>";
+            }
+
+            // Apply weekend discount (7% extra)
+            if (today === 0 || today === 6) {
+                let weekendDiscount = totalPrice * 0.07;
+                discount += weekendDiscount;
+                discountMessage += "<p class='discount-message'>7% weekend discount applied!</p>";
+            }
+
+            let finalPrice = totalPrice - discount;
+
+            document.getElementById("before-discount").innerText = totalPrice.toFixed(2);
+            document.getElementById("total-price").innerText = finalPrice.toFixed(2);
+            document.getElementById("discount-message").innerHTML = discountMessage;
+        }
+
+        function updateQuantity(index, change) {
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+            
+            if (cart[index].quantity + change > 0) {
+                cart[index].quantity += change;
+            } else {
+                cart.splice(index, 1);
+            }
+
+            localStorage.setItem("cart", JSON.stringify(cart));
+            loadCart();
+        }
+
+        function removeItem(index) {
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+            cart.splice(index, 1);
+            localStorage.setItem("cart", JSON.stringify(cart));
+            loadCart();
+        }
+
+        function checkout() {
+            alert("Order placed successfully!");
+            localStorage.removeItem("cart");
+            loadCart();
+        }
+
+        function goBack() {
+            window.location.href = "homepage.html";
+        }
+
+        document.addEventListener("DOMContentLoaded", loadCart);
+    </script>
+
+</body>
+</html>
