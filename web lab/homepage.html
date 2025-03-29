@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Order delicious food online with Foodie. Browse our menu and get your favorites delivered fast!">
+    <meta name="keywords" content="food delivery, online order, pizza, burger, pasta, sushi, salad, steak">
+    <meta name="author" content="Code Arcade">
     <title>Food Delivery</title>
     <style>
         * {
@@ -13,7 +16,7 @@
         }
 
         body {
-            background-color: #f8f8f8;
+            background: linear-gradient(to bottom, #ff9800, #f8f8f8);
         }
 
         .navbar {
@@ -21,8 +24,8 @@
             justify-content: space-between;
             align-items: center;
             padding: 20px 60px;
-            background: white;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            background: #222;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
             position: sticky;
             top: 0;
             z-index: 1000;
@@ -31,7 +34,7 @@
         .logo {
             font-size: 28px;
             font-weight: bold;
-            color: #e74c3c;
+            color: white;
         }
 
         .nav-links {
@@ -45,53 +48,77 @@
 
         .nav-links a {
             text-decoration: none;
-            color: #333;
+            color: white;
             font-size: 18px;
             transition: 0.3s;
         }
 
-        .nav-links a:hover {
-            color: #e74c3c;
+        .nav-links a:hover, .nav-links .active {
+            color: #ff9800;
+            font-weight: bold;
         }
 
         .food-section {
             text-align: center;
-            padding: 80px 0;
+            padding: 80px 20px;
+        }
+
+        .food-section h2 {
+            font-size: 36px;
+            color: white;
+            background: #ff5722;
+            display: inline-block;
+            padding: 15px 25px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.2);
         }
 
         .food-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 40px;
-            justify-content: center; /* Centers the grid */
-            align-items: center;
-            max-width: 700px; /* Adjusted max-width */
-            margin: 0 auto; /* Centers the grid container */
+            max-width: 900px;
+            margin: 0 auto;
         }
 
         .food-item {
             background: white;
-            padding: 40px; /* Increased padding */
+            padding: 40px;
             border-radius: 10px;
-            width: 320px; /* Increased width */
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            margin-bottom: 50px; /* More spacing between items */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
             text-align: center;
+            color: black;
         }
 
         .food-item img {
             width: 100%;
+            max-width: 200px;
+            height: 150px;
+            object-fit: cover;
             border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .food-item img:hover {
+            transform: scale(1.1);
         }
 
         .about-us {
             display: flex;
+            flex-wrap: wrap;
             justify-content: space-around;
             align-items: start;
-            padding: 100px;
+            padding: 60px 20px;
             background: #333;
             color: white;
-            margin-top: 80px;
+        }
+
+        .about-us div {
+            max-width: 350px;
+            text-align: center;
         }
 
         .footer {
@@ -99,7 +126,25 @@
             color: white;
             padding: 40px;
             text-align: center;
-            margin-top: 80px;
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                align-items: center;
+                padding: 10px;
+            }
+            .nav-links {
+                flex-direction: column;
+                align-items: center;
+            }
+            .nav-links li {
+                margin: 10px 0;
+            }
+            .about-us {
+                flex-direction: column;
+                align-items: center;
+            }
         }
     </style>
 </head>
@@ -110,56 +155,27 @@
         <ul class="nav-links">
             <li><a href="homepage.html">Home</a></li>
             <li><a href="category.html">Categories</a></li>
-            <li><a href="#">Foods</a></li>
-            <li><a href="order.html">Order</a></li>
+          
+            
             <li><a href="contact.html">Contact</a></li>
             <li><a href="login.html">Login</a></li>
         </ul>
     </nav>
 
     <section class="food-section">
-        <h2 style="margin-bottom: 30px;">Explore Foods</h2>
+        <h2>Explore Foods</h2>
         <div class="food-grid">
-            <div class="food-item"><img src="https://source.unsplash.com/320x240/?pizza" alt="Pizza"><p>Delicious Pizza</p></div>
-            <div class="food-item"><img src="https://source.unsplash.com/320x240/?burger" alt="Burger"><p>Cheesy Burger</p></div>
-            <div class="food-item"><img src="https://source.unsplash.com/320x240/?pasta" alt="Pasta"><p>Creamy Pasta</p></div>
-            <div class="food-item"><img src="https://source.unsplash.com/320x240/?sushi" alt="Sushi"><p>Fresh Sushi</p></div>
-            <div class="food-item"><img src="https://source.unsplash.com/320x240/?salad" alt="Salad"><p>Healthy Salad</p></div>
-            <div class="food-item"><img src="https://source.unsplash.com/320x240/?steak" alt="Steak"><p>Juicy Steak</p></div>
-        </div>
-    </section>
-
-    <section class="about-us">
-        <div style="width: 35%; text-align: center;">
-            <h2 style="margin-bottom: 20px;">About Us</h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat officia, temporibus expedita dicta eligendi harum architecto fugiat sint, laudantium omnis animi. Voluptas praesentium maiores minima pariatur necessitatibus consequuntur, similique assumenda.</p>
-        </div>
-        
-        <div style="width: 25%;">
-            <h2 style="margin-bottom: 20px;">Site Map</h2>
-            <ul style="list-style: none; padding: 0;">
-                <li style="margin-bottom: 10px;"><a href="#" style="color: red; text-decoration: none;">Categories</a></li>
-                <li style="margin-bottom: 10px;"><a href="#" style="color: red; text-decoration: none;">Foods</a></li>
-                <li style="margin-bottom: 10px;"><a href="#" style="color: red; text-decoration: none;">Order</a></li>
-                <li style="margin-bottom: 10px;"><a href="#" style="color: red; text-decoration: none;">Contact</a></li>
-                <li><a href="#" style="color: red; text-decoration: none;">Login</a></li>
-            </ul>
-        </div>
-        
-        <div style="width: 25%; text-align: center;">
-            <h2 style="margin-bottom: 20px;">Social Links</h2>
-            <div style="display: flex; justify-content: center; gap: 15px; margin-top: 15px;">
-                <a href="#"><img src="https://cdn-icons-png.flaticon.com/48/733/733547.png" width="40"></a>
-                <a href="#"><img src="https://cdn-icons-png.flaticon.com/48/174/174855.png" width="40"></a>
-                <a href="#"><img src="https://cdn-icons-png.flaticon.com/48/733/733579.png" width="40"></a>
-                <a href="#"><img src="https://cdn-icons-png.flaticon.com/48/174/174857.png" width="40"></a>
-                <a href="#"><img src="https://cdn-icons-png.flaticon.com/48/1384/1384060.png" width="40"></a>
-            </div>
+            <div class="food-item"><img src="1pizza.jpg" alt="Delicious Pizza"><p>Delicious Pizza</p></div>
+            <div class="food-item"><img src="buger.jpg" alt="Cheesy Burger"><p>Cheesy Burger</p></div>
+            <div class="food-item"><img src="pasta.jpg" alt="Creamy Pasta"><p>Creamy Pasta</p></div>
+            <div class="food-item"><img src="sushi.jpg" alt="Fresh Sushi"><p>Fresh Sushi</p></div>
+            <div class="food-item"><img src="salad.jpg" alt="Healthy Salad"><p>Healthy Salad</p></div>
+            <div class="food-item"><img src="steak.jpg" alt="Juicy Steak"><p>Juicy Steak</p></div>
         </div>
     </section>
 
     <footer class="footer">
-        <p>All rights reserved. Design by <span style="color: red;">Code Arcade</span></p>
+        <p>All rights reserved. Design by <span style="color: red;">Mohanish,Parth,Saran</span></p>
     </footer>
 
 </body>

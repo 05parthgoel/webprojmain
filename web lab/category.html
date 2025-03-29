@@ -79,9 +79,11 @@
         }
 
         .category-item img {
-            width: 100%;
+            width: 300px; /* Set a fixed width */
+            height: 200px; /* Set a fixed height */
+            object-fit: cover; /* Ensure the image covers the entire area without stretching */
             border-radius: 10px;
-            height: auto;
+            margin: 0 auto; /* Center the image horizontally */
         }
 
         .category-item h3 {
@@ -186,37 +188,37 @@
         <h2 style="margin-bottom: 40px; font-size: 36px; color: #333;">Food Categories</h2>
         <div class="category-grid">
             <div class="category-item">
-                <img src="https://source.unsplash.com/700x400/?pizza" alt="Pizza">
+                <img src="margherita-pizza.jpeg" alt="Pizza">
                 <h3>Pizza</h3>
                 <p>Delicious, cheesy, and loaded with your favorite toppings.</p>
                 <button class="category-button" onclick="location.href='pizza.html'">View Pizzas</button>
             </div>
             <div class="category-item">
-                <img src="https://source.unsplash.com/700x400/?burger" alt="Burger">
+                <img src="bacon burger.jpg" alt="Burger">
                 <h3>Burger</h3>
                 <p>Juicy, flavorful, and stacked with fresh ingredients.</p>
                 <button class="category-button" onclick="location.href='burger.html'">View Burgers</button>
             </div>
             <div class="category-item">
-                <img src="https://source.unsplash.com/700x400/?pasta" alt="Pasta">
+                <img src="lasagna.jpg" alt="Pasta">
                 <h3>Pasta</h3>
                 <p>Rich, creamy, and full of Italian flavors.</p>
                 <button class="category-button" onclick="location.href='pasta.html'">View Pastas</button>
             </div>
             <div class="category-item">
-                <img src="https://source.unsplash.com/700x400/?sushi" alt="Sushi">
+                <img src="california roll.webp" alt="Sushi">
                 <h3>Sushi</h3>
                 <p>Fresh, healthy, and made with the finest ingredients.</p>
                 <button class="category-button" onclick="location.href='sushi.html'">View Sushi</button>
             </div>
             <div class="category-item">
-                <img src="https://source.unsplash.com/700x400/?salad" alt="Salad">
+                <img src="greek salad.jpg" alt="Salad">
                 <h3>Salad</h3>
                 <p>Nutritious, refreshing, and packed with vitamins.</p>
                 <button class="category-button" onclick="location.href='salad.html'">View Salads</button>
             </div>
             <div class="category-item">
-                <img src="https://source.unsplash.com/700x400/?steak" alt="Steak">
+                <img src="wagyu.jpg" alt="Steak">
                 <h3>Steak</h3>
                 <p>Tender, juicy, and cooked to perfection.</p>
                 <button class="category-button" onclick="location.href='steak.html'">View Steaks</button>
